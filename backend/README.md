@@ -1,51 +1,48 @@
-### Как запустить проект:
 
-Клонировать репозиторий и перейти в него в командной строке:
+### Как запустить backend приложение:
 
-```
-git clone https://github.com/yandex-praktikum/kittygram_backend.git
-```
+Форкнуть и клонировать репозиторий на компьютер и перейти в него в командной строке:
+~~~bash
+Ссылка исходного проекта: https://github.com/karpova-el-m/kittygram_final/
+~~~
+~~~bash
+После скачивания: cd kittygram_final/
+~~~
 
-```
-cd kittygram_backend
-```
+В корневой директории создать и открыть через редактор файл для сохранения переменных окружения:
 
-Cоздать и активировать виртуальное окружение:
+~~~bash
+nano .env
+~~~
 
-```
-python3 -m venv env
-```
+Добавить в файл переменные и сохранить:
+~~~bash
+SECRET_KEY=...
+DEBUG=True/False
+ALLOWED_HOSTS=127.0.0.1,localhost,84.252.136.172,kittygramhomework.zapto.org
+~~~
 
-* Если у вас Linux/macOS
+Перейти в директорию backend:
+~~~bash
+cd backend/
+~~~
 
-    ```
-    source env/bin/activate
-    ```
+Создать Docker volume:
+~~~bash
+docker volume create sqlite_data
+~~~
 
-* Если у вас windows
+Собрать образ из Dockerfile:
+~~~bash
+docker build -t taski_backend .
+~~~
 
-    ```
-    source env/scripts/activate
-    ```
+Запустить контейнер с Docker volume:
+~~~bash
+docker run --name taski_backend_container -p 8000:8000 -v sqlite_data:/data taski_backend
+~~~
 
-```
-python3 -m pip install --upgrade pip
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
-pip install -r requirements.txt
-```
-
-Выполнить миграции:
-
-```
-python3 manage.py migrate
-```
-
-Запустить проект:
-
-```
-python3 manage.py runserver
-```
+В отдельном окне терминала вновь запустить миграции:
+~~~bash
+docker exec taski_backend_container python manage.py migrate
+~~~
