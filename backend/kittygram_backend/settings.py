@@ -11,12 +11,14 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)
 
 DEBUG = os.getenv('DEBUG', 'True')
 
-ALLOWED_HOSTS = [
-    os.getenv('ALLOWED_HOST_1', ''),
-    os.getenv('ALLOWED_HOST_2', ''),
-    os.getenv('ALLOWED_HOST_3', ''),
-    os.getenv('ALLOWED_HOST_4', '')
-]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '84.252.136.172', 'kittygramhomework.zapto.org']
+
+# ALLOWED_HOSTS = [
+#     os.getenv('ALLOWED_HOST_1', ''),
+#     os.getenv('ALLOWED_HOST_2', ''),
+#     os.getenv('ALLOWED_HOST_3', ''),
+#     os.getenv('ALLOWED_HOST_4', '')
+# ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
