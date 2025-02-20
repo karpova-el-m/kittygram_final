@@ -1,48 +1,38 @@
 
 ### Как запустить backend приложение:
 
-Форкнуть и клонировать репозиторий на компьютер и перейти в него в командной строке:
-~~~bash
-Ссылка исходного проекта: https://github.com/karpova-el-m/kittygram_final/
-~~~
-~~~bash
-После скачивания: cd kittygram_final/
-~~~
+1. Клонировать репозиторий на компьютер и перейти в него в командной строке:
+```
+Ссылка на код исходного проекта: https://github.com/karpova-el-m/kittygram_final/tree/project_code_review/
+```
 
-В корневой директории создать и открыть через редактор файл для сохранения переменных окружения:
-
-~~~bash
+2. В корневой директории создать и открыть через редактор файл для сохранения переменных окружения. Добавьте в него необходимые переменные окружения. Убедитесь, что файл .env добавлен в .gitignore, чтобы предотвратить его попадание в систему контроля версий.
+```
 nano .env
-~~~
+```
 
-Добавить в файл переменные и сохранить:
-~~~bash
-SECRET_KEY=...
-DEBUG=True/False
-ALLOWED_HOSTS=127.0.0.1,localhost,84.252.136.172,kittygramhomework.zapto.org
-~~~
-
-Перейти в директорию backend:
-~~~bash
+3. Перейдите в директорию backend и установите зависимости:
+```
 cd backend/
-~~~
+```
+```sh
+pip install -r requirements.txt
+```
+4. Выполните миграции базы данных:
+```sh
+python manage.py migrate
+```
+5. Создайте суперпользователя:
+```
+python manage.py createsuperuser
+```
+6. Запустите сервер разработки:
+```
+python manage.py runserver
+```
 
-Создать Docker volume:
-~~~bash
-docker volume create sqlite_data
-~~~
+### Проект разработала:
 
-Собрать образ из Dockerfile:
-~~~bash
-docker build -t taski_backend .
-~~~
+Карпова Е.М. - https://github.com/karpova-el-m
 
-Запустить контейнер с Docker volume:
-~~~bash
-docker run --name taski_backend_container -p 8000:8000 -v sqlite_data:/data taski_backend
-~~~
-
-В отдельном окне терминала вновь запустить миграции:
-~~~bash
-docker exec taski_backend_container python manage.py migrate
-~~~
+Telegram - [@karpova_el_m](https://t.me/karpova_el_m)
